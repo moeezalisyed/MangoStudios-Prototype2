@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    private List<Player> playersInitialised; // list of all players
-		private Player nextPlayer;
+	private List<Player> playersInitialised = new List<Player>(); // list of all players
+		private int nextPlayer = 0;
 		public List<Player> shadowPlayers = new List<Player>(); // list of all shadowplayers
 		public Player currentplayer; // the current player
 		public Boss THEBOSS; // the current boss
@@ -19,12 +19,15 @@ public class GameManager : MonoBehaviour {
     void Start()
 	{
 		// initialise the current player
-		currentplayer = new Player();
+		GameObject playerObject = new GameObject();
+		currentplayer = playerObject.AddComponent<Player> ();
 		currentplayer.init (1, this);
+
 		this.playersInitialised.Add (currentplayer);
-		nextPlayer = createNextPlayer ();
+		nextPlayer = nextplayer ();
 		// we pass it an integer to initialise the boss type
-		THEBOSS = new Boss ();
+		GameObject bossObject = new GameObject();
+		THEBOSS = bossObject.AddComponent<Boss> ();
 		THEBOSS.init (this);
 
 	}
@@ -43,19 +46,25 @@ public class GameManager : MonoBehaviour {
 
 		// move on to the next player
 		shadowPlayers.Add (currentplayer);
-		currentplayer = nextPlayer;
-		this.playersInitialised.Add (currentplayer);
+		currentplayer = createNextPlayer(nextPlayer);
+		//this.playersInitialised.Add (currentplayer);
 		nextPlayer = createNextPlayer ();
 		THEBOSS.giveFullHealth ();
 
 
 	}
 
-	public Player createNextPlayer(){
+	public int nextplayer(){
+		// will return a random int between 0 and included. 
+		return 1;
+	}
+
+	public Player createNextPlayer(int nextptype){
 		//Create the Next Player using random order generation;
 		// Will fill this function out as we go along.
-		Player x = new Player();
-		x.init (1, this);
+		GameObject plObejct = new GameObject();
+		Player x = plObejct.AddComponent<Player> ();
+		x.init (nextptype, this);
 		return x;
 	}
 

@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-sceneSetups: []
-=======
 sceneSetups:
 - path: Assets/MainScene.unity
   isLoaded: 1
   isActive: 1
->>>>>>> Stashed changes

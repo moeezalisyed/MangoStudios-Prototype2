@@ -28,6 +28,8 @@ public class Boss : MonoBehaviour {
 		chargeSpeed = 4;
 		m = owner;
 		this.bossHealth = 100;
+
+
 		var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);	// Create a quad object for holding the gem texture.
 		model = modelObject.AddComponent<BossModel>();						// Add a marbleModel script to control visuals of the gem.
 		model.init(this);
@@ -204,7 +206,15 @@ public class Boss : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.name == "Bullet") {
-			this.dealDamage (2);
+			// Somehow end to get access to bullet's owner
+			// Will come back and do this 
+			if (/*other.GetComponentInParent.powner.abilTime > 0f*/false) {
+				
+
+				this.dealDamage (5);
+			} else {
+				this.dealDamage (2);
+			}
 		}
 	}
 

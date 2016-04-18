@@ -8,10 +8,20 @@ public class playerModel : MonoBehaviour
 {
 	private int playerType;
 	public Player owner;
+	public Material mat;
 
-	public void init(int playerType, Player owner) {
+	public void init(int playerType, Player powner) {
 		this.playerType = playerType;
-		owner = owner;
+		owner = powner;
+	
+		transform.parent = owner.transform;
+		transform.localPosition = new Vector3 (0, 0, 0);
+		name = "PlayerModel";
+		mat = GetComponent<Renderer> ().material;
+		mat.shader = Shader.Find ("Sprites/Default");
+		mat.mainTexture = Resources.Load<Texture2D> ("Textures/char" + this.playerType);
+		mat.color = new Color (1, 1, 1, 1);
+	
 	}
 
 	void OnBecameInvisible() {
@@ -32,23 +42,5 @@ public class playerModel : MonoBehaviour
 //	}
 
 	void damageTexture(){}
-
-	void OnGUI(){
-		GUI.color = Color.yellow;
-		GUI.skin.box.alignment = TextAnchor.MiddleLeft;
-		GUI.skin.box.fontSize = 25;
-		string s = "";
-		for (int i = 0; i < (owner.cdF -owner.clock+owner.cdbufF) *10 ; i++) {
-			s += "I";
-		}
-		GUI.Box(new Rect (10, 500, 200, 100), s);
-		GUI.color = Color.white;
-		GUI.skin.box.fontSize = 12;
-		GUI.skin.box.alignment = TextAnchor.MiddleCenter;
-	}
-
-
-
-
 
 }

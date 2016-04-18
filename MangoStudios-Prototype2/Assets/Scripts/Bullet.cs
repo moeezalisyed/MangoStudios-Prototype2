@@ -7,13 +7,21 @@ public class Bullet : MonoBehaviour {
 	private float speed;
 	private int playerType;
 	private float clock;
-
+	public Player powner;
 
 	// Use this for initialization
 	public void init(Player owner) {
 		this.name = "Bullet";
-		speed = 7;
+
+
+		//speed = 7;
 		playerType = owner.getType ();
+		this.powner = owner;
+		if (playerType == 0 && powner.usingAbility) {
+			speed = 14;
+		} else {
+			speed = 7;
+		}
 		clock = 0f;
 
 		var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);	// Create a quad object for holding the gem texture.
@@ -23,6 +31,10 @@ public class Bullet : MonoBehaviour {
 		BoxCollider2D playerbody = gameObject.AddComponent<BoxCollider2D> ();
 		playerbody.isTrigger = true;
 
+	}
+
+	public Player getOwner(){
+		return this.powner;
 	}
 
 	// Update is called once per frame
