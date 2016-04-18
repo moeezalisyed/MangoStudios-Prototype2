@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class playerModel : MonoBehaviour
 {
 	private int playerType;
+	public Player owner;
 
-	public void init(int playerType) {
+	public void init(int playerType, Player owner) {
 		this.playerType = playerType;
+		owner = owner;
 	}
 
 	void OnBecameInvisible() {
@@ -36,7 +38,7 @@ public class playerModel : MonoBehaviour
 		GUI.skin.box.alignment = TextAnchor.MiddleLeft;
 		GUI.skin.box.fontSize = 25;
 		string s = "";
-		for (int i = 0; i < (cd-clock+cdbuf) *10 ; i++) {
+		for (int i = 0; i < (owner.cdF -owner.clock+owner.cdbufF) *10 ; i++) {
 			s += "I";
 		}
 		GUI.Box(new Rect (10, 500, 200, 100), s);

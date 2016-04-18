@@ -14,30 +14,18 @@ public class GameManager : MonoBehaviour {
 		public Boolean gameover = false; // if the game is over and the player loses
 		public Boolean gamewon = false; // if the game is over and the player wins
 
-    // Sound stuff
-    public AudioSource music;
-    public AudioSource sfx;
-
-    // Music clips
-    private AudioClip idle;
-    private AudioClip gametrack;
-    private AudioClip winmusic;
-
-    // Sound effect clips
-    private AudioClip playerDead;
-    private AudioClip playerHit;
-    private AudioClip click;
-
+  
     // Use this for initialization
     void Start()
 	{
 		// initialise the current player
 		currentplayer = new Player();
-
+		currentplayer.init (1, this);
 		this.playersInitialised.Add (currentplayer);
 		nextPlayer = createNextPlayer ();
 		// we pass it an integer to initialise the boss type
-		THEBOSS = new Boss (1);
+		THEBOSS = new Boss ();
+		THEBOSS.init (this);
 
 	}
 
@@ -63,10 +51,12 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void createNextPlayer(){
+	public Player createNextPlayer(){
 		//Create the Next Player using random order generation;
 		// Will fill this function out as we go along.
-
+		Player x = new Player();
+		x.init (1, this);
+		return x;
 	}
 
 	// this would be to set up the bars to the right
